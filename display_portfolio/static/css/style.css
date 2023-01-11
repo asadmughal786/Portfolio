@@ -8,6 +8,12 @@
 /*--------------------------------------------------------------
 # General
 --------------------------------------------------------------*/
+.background_white
+{
+  background-color: white !important;
+  box-shadow: 1px 1px 7px 7px rgba(211, 211, 211, 0.342) !important;
+}
+
 
 body {
   font-family: "Open Sans", sans-serif;
