@@ -32,7 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'display_portfolio',
-    # 'Auth',
+    'user_Auth',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
