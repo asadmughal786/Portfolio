@@ -18,5 +18,5 @@ class user_resgisteration(models.Model):
 
 class user_images(models.Model):
     user = models.OneToOneField(user_resgisteration,on_delete=models.CASCADE,null=True,blank=True)
+    image = models.ImageField(upload_to='/image')
     save_date = models.DateTimeField()
-    
