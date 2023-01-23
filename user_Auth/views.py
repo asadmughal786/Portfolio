@@ -8,7 +8,53 @@ from .froms import *
 def Registerations(request):
     
     if request.method == 'POST':
-        form = User_registerations(request.POST,request.FILES)
+        form = User_registerations(data=request.POST,files=request.FILES)
+        print('-------------------------------------->>>>>> Working-------------------------------------')
+        if form.is_valid():
+            fname = form.cleaned_data['user_first_name']
+            print(fname)
+            lname = form.cleaned_data['user_last_name']
+            print(lname)
+            age = form.cleaned_data['user_age']
+            print(age)
+            phoneNumber = form.cleaned_data['user_phone']
+            print(phoneNumber)
+            email = form.cleaned_data['user_email']
+            print(email)
+            address = form.cleaned_data['user_address']     
+            city = form.cleaned_data['user_city']
+            is_freelancer = form.cleaned_data['user_freelancer']
+            bio = form.cleaned_data['user_bio']
+            profile_image = form.cleaned_data['user_profile_picture']
+            website_link = form.cleaned_data['user_website']
+            password = form.cleaned_data['user_password']
+            conf_password = form.cleaned_data['user_conf_password']
+            print('Working')
+            if password == conf_password:
+                user = user_resgisteration(user_first_name=fname,user_last_name=lname,user_age=age,user_phone=phoneNumber,user_email=email,user_address=address,user_city=city,user_freelancer=is_freelancer,user_bio=bio,user_profile_picture=profile_image,user_webstie=website_link,user_password=password,user_conf_password=conf_password)
+                user.save()
+                messages.success(request,'User Registered Successfully!')
+            else:
+                messages.error(request,"Password Doesn't matched!")
+                form = User_registerations()
+            return render(request,'registeration.html',{'form':form})
+        else:
+            print('Form is Get state')
+            form = User_registerations()
+        return render(request,'registeration.html', {'form':form})
+    else:
+        form = User_registerations()
+    return render(request,'registeration.html',{'form':form})
+
+
+def login(request):
+    return render(request,"login.html")
+
+
+def Reg(request):
+    if request.method == 'POST':
+        form = User_registerations(data=request.POST)
+        print('-------------------------------------->>>>>> Working-------------------------------------')
         if form.is_valid():
             fname = form.cleaned_data['user_first_name']
             lname = form.cleaned_data['user_last_name']
@@ -19,26 +65,12 @@ def Registerations(request):
             city = form.cleaned_data['user_city']
             is_freelancer = form.cleaned_data['user_freelancer']
             bio = form.cleaned_data['user_bio']
-            profile_image = form.cleaned_data['user_profile_picture']
+            # profile_image = form.cleaned_data['user_profile_picture']
             website_link = form.cleaned_data['user_website']
             password = form.cleaned_data['user_password']
             conf_password = form.cleaned_data['user_conf_password']
-            if password == conf_password:
-                user = user_resgisteration(user_first_name=fname,user_last_name=lname,user_age=age,user_phone=phoneNumber,user_email=email,user_address=address,user_city=city,user_freelancer=is_freelancer,user_bio=bio,user_profile_picture=profile_image,user_webstie=website_link,user_password=password,user_conf_password=conf_password)
-                user.save()
-                messages.success(request,'User Registered Successfully!')
-            else:
-                messages.error(request,"Password Doesn't matched!")
-                form = User_registerations()
-            return render(request,'registeration.html',{'form':form})
-            return HttpResponse("Working")
-        # return HttpResponseRedirect('/')
-        return HttpResponse("outer Working")
-    # return render(request,'registeration.html',{"form":form})
+
+            print(f'Name: {fname} \n Last Name:{lname}\n age: {age}\nPhone: {phoneNumber}\n Email:{email}')
     else:
-        form = User_registerations()
+            form = User_registerations()
     return render(request,'registeration.html',{'form':form})
-
-
-def login(request):
-    return render(request,"login.html")
