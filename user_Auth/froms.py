@@ -15,8 +15,5 @@ class User_registerations(forms.Form):
     user_bio = forms.CharField(required=True,validators=[validators.MaxLengthValidator(255)])
     # user_profile_picture = forms.ImageField(required=True)
     user_website = forms.URLField(required=True,validators=[validators.URLValidator()])
-    user_password = forms.CharField(required=True,validators=[validators.RegexValidator("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$",'Password is not Strong')])
-    user_conf_password = forms.CharField(required=True,validators=[validators.RegexValidator("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$",'Password is not Strong')])
-    # class Meta:
-    #     model = user_resgisteration
-    #     fields = '__all__'
+    user_password = forms.CharField(widget=forms.PasswordInput(),required=True,validators=[validators.RegexValidator("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$",'Password is not Strong')])
+    user_conf_password = forms.CharField(widget=forms.PasswordInput(),required=True,validators=[validators.RegexValidator("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$",'Password is not Strong')])
