@@ -3,13 +3,13 @@ from phonenumber_field.modelfields import PhoneNumberField
 
 # Create your models here.
 
-class user_resgisteration(models.Model):
-    user_first_name = models.CharField(max_length=30,blank=True, null=True)
-    user_last_name = models.CharField(max_length=30,blank=True,null=True)
-    user_age = models.IntegerField(blank=True,null=True)
+class user_register(models.Model):
+    user_first_name = models.CharField(max_length=30,blank=False, null=True)
+    user_last_name = models.CharField(max_length=30,blank=False,null=True)
+    user_age = models.IntegerField(blank=False,null=True)
     user_phone = PhoneNumberField()
-    user_email = models.EmailField(null=True)
-    user_address= models.TextField(null=True)
+    user_email = models.EmailField(blank=False,null=True)
+    user_address= models.TextField(blank=False,null=True)
     user_city = models.CharField(max_length=15,null=True)
     user_freelancer = models.BooleanField()
     user_bio = models.TextField(max_length=255,null=True)
