@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.contrib import messages
 from .models import user_register
 from .froms import User_Login, User_registerations
+from django.contrib.auth.hashers import make_password, check_password
 
 # Create your views here.
 
@@ -45,8 +46,14 @@ def Reg(request):
             bio = form.cleaned_data['user_bio']
             # profile_image = form.cleaned_data['user_profile_picture']
             website_link = form.cleaned_data['user_website']
-            password = form.cleaned_data['user_password']
-            conf_password = form.cleaned_data['user_conf_password']
+            password = make_password(form.cleaned_data['user_password'])
+            conf_password = make_password(form.cleaned_data['user_conf_password'])
+            
+            checkPassword = check_password(form.cleaned_data['user_password'],password)
+
+            print("---->Encrypted password: ",password)
+            print("---->Decrypted Password: ",checkPassword)
+
             user_data = user_register.objects.filter(user_email=email)
             if user_data:
                 if password == conf_password:
