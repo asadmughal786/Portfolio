@@ -31,8 +31,16 @@
                                               {% comment %} Form is starting {% endcomment %}
 
                     <form class="mx-1 mx-md-4" method="POST" novalidate>
-
                         {% csrf_token %}
+                        <strong>
+                          {% for message in messages %}
+                          <div class="container-fluid p-0 justify-content-center">
+                            <div class="alert alert-{{ message.tags }}" role="alert" >
+                              {{ message }}
+                            </div>
+                          </div>
+                          {% endfor %}
+                      </strong>
                         <div class="col-md-12 align-items-center mb-4">
                           <i class="fas fa-user fa-lg"></i>
                           <label class="form-label" for="form3Example1c">{{form.login_email.label}}</label>
@@ -51,9 +59,15 @@
                           <small class="text-danger">{{form.login_pass.errors|striptags}}</small>
                         </div>
     
-                      <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                        <button type="submit" class="btn btn-primary btn-lg">Sign in</button>
-                      </div>
+                        <div class="d-flex justify-content-center col-md-12 mx-4 mb-3 mb-lg-4">
+                          <div class="d-flex justify-content-end col-md-6 mx-4 mb-3 mb-lg-4">
+                            <a class='nav-link' href="{% url 'reg' %}"> <button class="btn btn-primary btn-lg" type="button" value="login" >Registeration</button></a>
+                          </div>
+                          <div class="d-flex justify-content-end col-md-3 mx-4 mb-3 mb-lg-4">
+                            <input class="btn btn-primary btn-lg" type="submit" value="Login" />
+                          </div>
+                          
+                        </div>
     
                     </form>
     
