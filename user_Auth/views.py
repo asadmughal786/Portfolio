@@ -14,7 +14,7 @@ def user_login(request):
         if form.is_valid():
             email = form.cleaned_data['login_email']
             password = form.cleaned_data['login_pass']
-            user_data = user_register.objects.filter(user_email=email,user_password=password).first()
+            user_data = user_register.registration.filter(user_email=email,user_password=password).first()
             if user_data:
                 return HttpResponse("Successfully login!")
             else:
@@ -45,7 +45,7 @@ def Reg(request):
             print("---->Encrypted password: ",password)
             print("---->Decrypted Password: ",checkPassword)
 
-            user_data = user_register.objects.filter(user_email=email,user_website = website_link).first()
+            user_data = user_register.registration.filter(user_email=email,user_website = website_link).first()
             if not user_data:
                 if checkPassword==True:
                     user = user_register(user_first_name=fname,user_last_name=lname,user_age=age,user_phone=phoneNumber,user_email=email,user_address=address,user_city=city,user_freelancer=is_freelancer,user_bio=bio,user_profile_picture=profile_image,user_website=website_link,user_password=password)

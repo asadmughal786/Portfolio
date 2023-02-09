@@ -3,6 +3,10 @@ from .models import *
 from django.core import validators
 from phonenumber_field.formfields import PhoneNumberField
 
+class User_Login(forms.Form):
+    login_email = forms.EmailField(label="Email",widget=forms.EmailInput(attrs={'autocomplete':'off','class':'form-control','placeholder':'Enter Email'}),validators=[validators.EmailValidator()],required=True)
+    login_pass = forms.CharField(label='Password',widget=forms.PasswordInput(attrs={'class':'form-control','placeholder':'Password'}),validators=[validators.RegexValidator("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$",'Password is not Strong')],required=True)
+
 class User_registerations(forms.Form):
     user_profile_picture = forms.ImageField(allow_empty_file=False,required=True)
     user_first_name = forms.CharField(label='First Name',widget=forms.TextInput(attrs={'autocomplete':'off','class':'form-control','placeholder':'First Name'}),validators=[validators.MaxLengthValidator(30)],required=True)
@@ -17,6 +21,26 @@ class User_registerations(forms.Form):
     user_bio = forms.CharField(label='Bio',widget=forms.TextInput(attrs={'autocomplete':'off','class':'form-control','placeholder':'Bio'}),validators=[validators.MaxLengthValidator(255)],required=True,)
     user_freelancer = forms.BooleanField(widget=forms.CheckboxInput(),required=False)
 
-class User_Login(forms.Form):
-    login_email = forms.EmailField(label="Email",widget=forms.EmailInput(attrs={'autocomplete':'off','class':'form-control','placeholder':'Enter Email'}),validators=[validators.EmailValidator()],required=True)
-    login_pass = forms.CharField(label='Password',widget=forms.PasswordInput(attrs={'class':'form-control','placeholder':'Password'}),validators=[validators.RegexValidator("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$",'Password is not Strong')],required=True)
+class Education(forms.Form):
+    degree_name= forms.CharField(label="Degree Name",widget=forms.TextInput(attrs={'autocomplete':'off'}),validators=[validators.MaxLengthValidator(30)],required=True)
+    degree_city = forms.CharField(label="City",widget=forms.TextInput(attrs={'autocomplete':'off'}))
+    degree_country = forms.CharField(label="Country",widget=forms.TextInput())
+    degree_start_date = forms.DateField(label="Degree Start Date",widget=forms.DateInput(attrs={'autocomplete':'off'}))
+    degree_end_date = forms.DateField(label="Degree End Date",widget=forms.DateInput(attrs={'autocomplete':'off'}))
+
+class ProfessionalExp(forms.Form):
+    company_name = forms.CharField()
+    city = forms.CharField(label="Degree Name",widget=forms.TextInput(attrs={'autocomplete':'off'}),validators=[validators.MaxLengthValidator(30)],required=True)
+    country = forms.CharField(label="Degree Name",widget=forms.TextInput(attrs={'autocomplete':'off'}),validators=[validators.MaxLengthValidator(30)],required=True)
+    job_start_date = forms.DateField(label="Joining Date",widget=forms.DateInput(attrs={'autocomplete':'off'}))
+    job_end_date = forms.DateField(label="Leaving Date",widget=forms.DateInput(attrs={'autocomplete':'off'}))
+
+class achivements(forms.Form):
+    achievement_title = forms.Form()
+    achievement_link = forms.URLField()
+    certification_start_date = forms.DateField()
+    certification_end_date = forms.DateField()
+
+class skills(forms.Form):
+    skill_name = forms.CharField()
+    skill_grip_value = forms.IntegerField(label="How Much do you have Grip in this?",widget=forms.NumberInput(),required=True)
