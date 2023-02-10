@@ -5,3 +5,7 @@ from .models import *
 @admin.register(user_register)
 class Users(admin.ModelAdmin):
     list_display =['id','user_first_name','user_last_name','user_age','user_phone','user_email','user_address','user_city','user_freelancer','user_bio','user_profile_picture','user_website','user_password']
+
+@admin.register(skills)
+class Skills(admin.ModelAdmin):
+    list_display = ['id','skill_name','grip_value','created_at','updated_at','user']

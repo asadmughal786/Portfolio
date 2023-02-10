@@ -23,24 +23,24 @@ class User_registerations(forms.Form):
 
 class Education(forms.Form):
     degree_name= forms.CharField(label="Degree Name",widget=forms.TextInput(attrs={'autocomplete':'off'}),validators=[validators.MaxLengthValidator(30)],required=True)
-    degree_city = forms.CharField(label="City",widget=forms.TextInput(attrs={'autocomplete':'off'}))
-    degree_country = forms.CharField(label="Country",widget=forms.TextInput())
-    degree_start_date = forms.DateField(label="Degree Start Date",widget=forms.DateInput(attrs={'autocomplete':'off'}))
-    degree_end_date = forms.DateField(label="Degree End Date",widget=forms.DateInput(attrs={'autocomplete':'off'}))
+    degree_city = forms.CharField(label='City',widget=forms.TextInput(attrs={'autocomplete':'off','class':'form-control','placeholder':'City'}),validators=[validators.MaxLengthValidator(15)])
+    degree_country = forms.CharField(label='Country',widget=forms.TextInput(attrs={'autocomplete':'off','class':'form-control','placeholder':'City'}),validators=[validators.MaxLengthValidator(15)])
+    degree_start_date = forms.DateField(label="Degree Start Date",widget=forms.DateInput(attrs={'autocomplete':'off','class':'form-control','placeholder':'Start Date'}))
+    degree_end_date = forms.DateField(label="Degree End Date",widget=forms.DateInput(attrs={'autocomplete':'off','class':'form-control','placeholder':'End Date'}))
 
 class ProfessionalExp(forms.Form):
-    company_name = forms.CharField()
-    city = forms.CharField(label="Degree Name",widget=forms.TextInput(attrs={'autocomplete':'off'}),validators=[validators.MaxLengthValidator(30)],required=True)
-    country = forms.CharField(label="Degree Name",widget=forms.TextInput(attrs={'autocomplete':'off'}),validators=[validators.MaxLengthValidator(30)],required=True)
-    job_start_date = forms.DateField(label="Joining Date",widget=forms.DateInput(attrs={'autocomplete':'off'}))
-    job_end_date = forms.DateField(label="Leaving Date",widget=forms.DateInput(attrs={'autocomplete':'off'}))
+    company_name = forms.CharField(label='Company Name', widget=forms.TextInput(attrs={'autocomplete':'off','class':'form-control','placeholder':'Achievement title'}),validators=[validators.MaxLengthValidator(30)],required=True)
+    city = forms.CharField(label='City',widget=forms.TextInput(attrs={'autocomplete':'off','class':'form-control','placeholder':'City'}),validators=[validators.MaxLengthValidator(15)])
+    country = forms.CharField(label='Country',widget=forms.TextInput(attrs={'autocomplete':'off','class':'form-control','placeholder':'City'}),validators=[validators.MaxLengthValidator(15)])
+    job_start_date = forms.DateField(label='Joining Date',widget=forms.DateInput(attrs={'autocomplete':'off','class':'form-control','placeholder':'Start Date'}))
+    job_end_date = forms.DateField(label='Ending Date',widget=forms.DateInput(attrs={'autocomplete':'off','class':'form-control','placeholder':'End Date'}))
 
 class achivements(forms.Form):
-    achievement_title = forms.Form()
-    achievement_link = forms.URLField()
-    certification_start_date = forms.DateField()
-    certification_end_date = forms.DateField()
+    achievement_title = forms.CharField(label='Achivement Title', widget=forms.TextInput(attrs={'autocomplete':'off','class':'form-control','placeholder':'Achievement title'}),validators=[validators.MaxLengthValidator(30)],required=True)
+    achievement_link = forms.URLField(label='Achivement URL',widget=forms.URLInput(attrs={'autocomplete':'off','class':'form-control','placeholder':'https://www.google.com'}),validators=[validators.URLValidator()],required=True)
+    certification_start_date = forms.DateField(label='Certification Start Date',widget=forms.DateInput(attrs={'autocomplete':'off','class':'form-control','placeholder':'Start Date'}))
+    certification_end_date = forms.DateField(label='Certification End Date',widget=forms.DateInput(attrs={'autocomplete':'off','class':'form-control','placeholder':'End Date'}))
 
 class skills(forms.Form):
-    skill_name = forms.CharField()
-    skill_grip_value = forms.IntegerField(label="How Much do you have Grip in this?",widget=forms.NumberInput(),required=True)
+    skill_name = forms.CharField(label='Skill Name',widget=forms.TextInput(attrs={'autocomplete':'off','class':'form-control','placeholder':'Skill Name'}))
+    skill_grip_value = forms.IntegerField(label="How Much do you have Grip in this?",widget=forms.NumberInput(attrs={'autocomplete':'off','class':'form-control','placeholder':'Enter Value'}),validators=[validators.MaxValueValidator(100)],required=True)

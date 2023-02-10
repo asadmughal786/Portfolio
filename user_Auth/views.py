@@ -2,7 +2,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.contrib import messages
 from .models import user_register
-from .froms import User_Login, User_registerations
+from .froms import *
 from django.contrib.auth.hashers import make_password, check_password
 
 # Create your views here.
@@ -62,3 +62,28 @@ def Reg(request):
     else:
         form = User_registerations()
     return render(request,'registeration.html',{'form':form})
+
+def profile(request,id):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            pass
+
+def add_skills(request,id):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            form = skills(request.POST)
+            if form.is_valid():
+                skill_name = form.cleaned_data['skill_name']
+                skill_grip = form.cleaned_data['skill_grip_value']
+                data = skills(skill_name=skill_name,grip_value=skill_grip)
+                data.save()
+                messages.success(request,'Data saved successfully')
+            else:
+                messages.error(request,'Invalid Data entered!',extra_tags='danger')
+            return HttpResponseRedirect('/skills/')
+        else:
+            form = skills()
+        return render(request,'skills.html',{'form':form})
+    else:
+        messages.error('You are not authorized to access this page!')
+    return HttpResponseRedirect('/login/')

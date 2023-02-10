@@ -38,6 +38,7 @@ class BaseSkillsModel(models.Model):
 
         
 class user_register(models.Model):
+    login_check = models.BooleanField(blank=True)
     user_first_name = models.CharField(max_length=30,blank=False, null=True)
     user_last_name = models.CharField(max_length=30,blank=False,null=True)
     user_age = models.IntegerField(blank=False,null=True)
@@ -57,10 +58,12 @@ class Education(BaseStartAtEndAt,BaseCreatedAtModel):
     Name_of_degree = models.CharField(max_length=30,blank=False,null=True)
     Education_data = models.Manager()
 
-class skills(BaseSkillsModel,):
+class skills(BaseSkillsModel):
+    user_skills = models.ForeignKey(user_register,verbose_name=('User_id'),on_delete=models.CASCADE)
     skills = models.Manager()
 
 class professional_experiance(BaseStartAtEndAt,BaseCreatedAtModel):
+    user_company = models.ForeignKey(user_register,verbose_name=('User_id'),on_delete=models.CASCADE)
     Company_name = models.CharField(max_length=30 , blank=False,null=True)
     prof_exp = models.Manager()
 
