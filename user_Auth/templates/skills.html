@@ -22,12 +22,12 @@
         <div class="col-sm-7 offset-1">
           <h4 class="text-center alert alert-warning">Registered Users Data</h4>
           {% if user_data %}
-          <h4>Data Table</h4>
+          <h4>Skill Data Table</h4>
           <table class="table table-hover">
             <thead>
               <tr>
                 <th scope="col">ID</th>
-                <th scope="col">Skill NAME</th>
+                <th scope="col">SKILL NAME</th>
                 <th scope="col">GRIP PERCENTAGE</th>
                 <th scope="col">ACTIONS</th>
               </tr>
@@ -45,14 +45,14 @@
                 </div>
                 {% endfor %}
             </strong>
-              {% for user in user_data %}
+              {% for skill in skills %}
               <tr class="table-active">
                 <th scope="row">{{user.id}}</th>
-                <td>{{user.First_Name}}</td>
-                <td>{{user.Last_name}}</td>
-                <td>{{user.email}}</td>
+                <td>{{skill.id}}</td>
+                <td>{{skill.skill_name}}</td>
+                <td>{{skill.skill_grip_value}}</td>
                 <td>
-                  <a href="{% url 'update_form' user.id %} " class="btn btn-warning btn-sm">Edit</a>
+                  <a href="{% url 'update_form' skill.id %} " class="btn btn-warning btn-sm">Edit</a>
                   <form action="{% url 'delete_data' user.id %}" method="POST" class="d-inline">
                     {% csrf_token %}
                     <input type="submit" class="btn btn-danger btn-sm" value="Delete">

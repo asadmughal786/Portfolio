@@ -11,7 +11,7 @@
           <div class="card-body p-4 p-md-6">
             <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Registration Form</h3>
 
-            <form action="" method="" enctype="multipart/form-data" novalidate>
+            <form action="" method="POST" enctype="multipart/form-data" novalidate>
               {% csrf_token %}
               <strong>
                 {% for message in messages %}
@@ -27,6 +27,7 @@
                 {% for field in form %}
                   <div class="col-md-4 mb-4">
                     <label class="form-label" for="firstName">{{ field.label }}</label>
+                    <img src="field.user_profile_picture" alt="">
                     <div class="form-outline border rounded-1 flex-fill mb-0">{{ field }}</div>
                     <small class="text-danger">{{ field.errors|striptags }}</small>
                   </div>
@@ -51,6 +52,3 @@
 </section>  
 
 {% endblock content %}
-  
-   
-  
